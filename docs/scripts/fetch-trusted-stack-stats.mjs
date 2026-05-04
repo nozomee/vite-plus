@@ -103,12 +103,9 @@ async function main() {
       githubStarsDisplay: formatStars(stars),
     });
   }
-  const payload = {
-    generatedAt: new Date().toISOString(),
-    projects,
-  };
+  const payload = { projects };
   await writeFile(OUT, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  console.log(`Wrote ${OUT}`);
+  console.log(`Wrote ${OUT} at ${new Date().toISOString()}`);
 }
 
 main().catch((err) => {

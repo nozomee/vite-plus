@@ -13,7 +13,6 @@ export interface TrustedStackStatProject {
 }
 
 export interface TrustedStackStatsFile {
-  generatedAt: string;
   projects: TrustedStackStatProject[];
 }
 
