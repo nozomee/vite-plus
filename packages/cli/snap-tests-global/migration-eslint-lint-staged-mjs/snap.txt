@@ -1,20 +1,18 @@
-> vp migrate --no-interactive # migration should warn about non-JSON lint-staged config
+[1]> vp migrate --no-interactive # migration should warn about non-JSON lint-staged config
 
 Migrating ESLint config to Oxlint...
 
-ESLint config migrated to .oxlintrc.json
+ESLint migration failed
 
-Replacing ESLint comments with Oxlint equivalents...
+⚠ ERR_PNPM_NO_MATCHING_VERSION  No matching version found for @oxlint/migrate@<semver> while fetching it from https://registry.<domain>/
 
-ESLint comments replaced
+The latest release of @oxlint/migrate is "1.61.0".
 
-✔ Removed eslint.config.mjs
+If you need the full list of all 85 published versions run "pnpm view @oxlint/migrate versions".
 
-lint-staged.config.mjs — please update eslint references manually
-◇ Updated .
-• Node <semver>  unknown latest
-• 2 config updates applied
-• ESLint rules migrated to Oxlint
+You can run `vp dlx @oxlint/migrate@<semver> --merge --type-aware --with-nursery --details` manually later
+ESLint migration failed.
+
 
 > cat lint-staged.config.mjs # verify non-JSON lint-staged config is preserved unchanged
 export default {

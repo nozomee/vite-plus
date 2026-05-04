@@ -16,6 +16,7 @@ export default defineConfig({
       'eslint/no-await-in-loop': 'off',
       'no-console': ['error', { allow: ['error'] }],
       'no-shadow': 'off',
+      'no-underscore-dangle': 'off',
       'typescript/no-unnecessary-boolean-literal-compare': 'off',
       'typescript/no-unnecessary-type-arguments': 'off',
       'typescript/no-unsafe-type-assertion': 'off',

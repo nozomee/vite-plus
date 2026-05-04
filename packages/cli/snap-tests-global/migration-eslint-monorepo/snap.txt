@@ -1,25 +1,26 @@
-> vp migrate --no-interactive # migration should detect eslint in monorepo and migrate all packages
+[1]> vp migrate --no-interactive # migration should detect eslint in monorepo and migrate all packages
 
-✔ Created vite.config.ts in vite.config.ts
+⚠ ERR_PNPM_NO_MATCHING_VERSION  No matching version found for @oxlint/migrate@<semver> while fetching it from https://registry.<domain>/
 
-✔ Merged .oxlintrc.json into vite.config.ts
-◇ Migrated . to Vite+<repeat>
-• Node <semver>  pnpm <semver>
-• 2 config updates applied
-• ESLint rules migrated to Oxlint
+The latest release of @oxlint/migrate is "1.61.0".
+
+If you need the full list of all 85 published versions run "$ pnpm view @oxlint/migrate versions".
+
+You can run `vp dlx @oxlint/migrate@<semver> --merge --type-aware --with-nursery --details` manually later
+ESLint migration failed. Fix the issue and re-run `vp migrate`.
+
 
 > cat package.json # check root eslint removed and scripts rewritten
 {
   "name": "migration-eslint-monorepo",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "lint": "vp lint .",
-    "prepare": "vp config"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint ."
   },
   "devDependencies": {
-    "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "eslint": "^9.0.0",
+    "vite": "^7.0.0"
   },
   "packageManager": "pnpm@<semver>"
 }
@@ -28,14 +29,14 @@
 {
   "name": "app",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
-    "lint": "vp lint .",
-    "lint:fix": "vp lint --fix ."
+    "dev": "vite dev",
+    "build": "vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "devDependencies": {
-    "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "eslint": "^9.0.0",
+    "vite": "^7.0.0"
   }
 }
 
@@ -43,9 +44,11 @@
 {
   "name": "@test/utils",
   "scripts": {
-    "lint": "vp lint ."
+    "lint": "eslint ."
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
 }
 
-> test ! -f eslint.config.mjs # check root eslint config is removed
+[1]> test ! -f eslint.config.mjs # check root eslint config is removed

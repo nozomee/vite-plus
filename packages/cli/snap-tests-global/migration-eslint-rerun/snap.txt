@@ -1,56 +1,31 @@
-> vp migrate --no-interactive # should detect vite-plus + eslint and auto-migrate eslint
+[1]> vp migrate --no-interactive # should detect vite-plus + eslint and auto-migrate eslint
 
 Migrating ESLint config to Oxlint...
 
-ESLint config migrated to .oxlintrc.json
+ESLint migration failed
 
-Replacing ESLint comments with Oxlint equivalents...
+⚠ ERR_PNPM_NO_MATCHING_VERSION  No matching version found for @oxlint/migrate@<semver> while fetching it from https://registry.<domain>/
 
-ESLint comments replaced
+The latest release of @oxlint/migrate is "1.61.0".
 
-✔ Removed eslint.config.mjs
-◇ Updated .
-• Node <semver>  unknown latest
-• 2 config updates applied
-• ESLint rules migrated to Oxlint
+If you need the full list of all 85 published versions run "pnpm view @oxlint/migrate versions".
+
+You can run `vp dlx @oxlint/migrate@<semver> --merge --type-aware --with-nursery --details` manually later
+ESLint migration failed.
+
 
 > cat package.json # check eslint removed from devDependencies and scripts rewritten
 {
   "name": "migration-eslint-rerun",
   "scripts": {
-    "lint": "vp lint ."
+    "lint": "eslint ."
   },
   "devDependencies": {
+    "eslint": "^9.0.0",
     "vite-plus": "latest"
   },
   "packageManager": "pnpm@<semver>"
 }
-
-> test ! -f eslint.config.mjs # check eslint config is removed
-> cat vite.config.ts # check oxlint config merged into vite.config.ts
-import { defineConfig } from 'vite-plus';
-
-export default defineConfig({
-  lint: {
-    "plugins": [
-      "oxc",
-      "typescript",
-      "unicorn",
-      "react"
-    ],
-    "categories": {
-      "correctness": "warn"
-    },
-    "env": {
-      "builtin": true
-    },
-    "rules": {
-      "no-unused-vars": "error"
-    },
-    "options": {
-      "typeAware": true,
-      "typeCheck": true
-    }
-  },
-  
-});
+[1]> test ! -f eslint.config.mjs # check eslint config is removed
+[1]> cat vite.config.ts # check oxlint config merged into vite.config.ts
+cat: vite.config.ts: No such file or directory

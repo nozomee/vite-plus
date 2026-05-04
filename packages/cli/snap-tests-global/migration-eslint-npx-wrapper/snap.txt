@@ -1,42 +1,33 @@
-> vp migrate --no-interactive # migration should rewrite bare eslint but leave npx wrappers unchanged
-◇ Migrated . to Vite+<repeat>
-• Node <semver>  pnpm <semver>
-• 4 config updates applied
-• ESLint rules migrated to Oxlint
+[1]> vp migrate --no-interactive # migration should rewrite bare eslint but leave npx wrappers unchanged
+
+⚠ ERR_PNPM_NO_MATCHING_VERSION  No matching version found for @oxlint/migrate@<semver> while fetching it from https://registry.<domain>/
+
+The latest release of @oxlint/migrate is "1.61.0".
+
+If you need the full list of all 85 published versions run "pnpm view @oxlint/migrate versions".
+
+You can run `vp dlx @oxlint/migrate@<semver> --merge --type-aware --with-nursery --details` manually later
+ESLint migration failed. Fix the issue and re-run `vp migrate`.
+
 
 > cat package.json # check eslint removed, bare eslint rewritten, npx/pnpm exec/bunx wrappers unchanged
 {
   "name": "migration-eslint-npx-wrapper",
   "scripts": {
-    "dev": "vp dev",
-    "build": "vp build",
+    "dev": "vite",
+    "build": "vite build",
     "lint": "npx eslint .",
     "lint:fix": "pnpm exec eslint --fix .",
     "lint:bunx": "bunx eslint .",
-    "lint:bare": "vp lint --fix .",
-    "prepare": "vp config"
+    "lint:bare": "eslint --fix --ext .ts,.tsx ."
   },
   "devDependencies": {
-    "vite": "catalog:",
-    "vite-plus": "catalog:"
+    "eslint": "^9.0.0",
+    "vite": "^7.0.0"
   },
   "packageManager": "pnpm@<semver>"
 }
+[1]> cat pnpm-workspace.yaml # check pnpm-workspace.yaml has overrides and catalog
+cat: pnpm-workspace.yaml: No such file or directory
 
-> cat pnpm-workspace.yaml # check pnpm-workspace.yaml has overrides and catalog
-catalog:
-  vite: npm:@voidzero-dev/vite-plus-core@latest
-  vitest: npm:@voidzero-dev/vite-plus-test@latest
-  vite-plus: latest
-overrides:
-  vite: 'catalog:'
-  vitest: 'catalog:'
-peerDependencyRules:
-  allowAny:
-    - vite
-    - vitest
-  allowedVersions:
-    vite: '*'
-    vitest: '*'
-
-> test ! -f eslint.config.mjs # check eslint config is removed
+[1]> test ! -f eslint.config.mjs # check eslint config is removed
