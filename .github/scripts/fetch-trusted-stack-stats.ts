@@ -4,7 +4,7 @@
  *
  * Requires Node.js >=22.18 (strip types). Run:
  *   `pnpm -C docs update-trusted-stack-stats`
- * or: `node docs/scripts/fetch-trusted-stack-stats.ts`
+ * or: `node .github/scripts/fetch-trusted-stack-stats.ts`
  */
 import { writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -14,10 +14,10 @@ import type {
   TrustedStackProjectId,
   TrustedStackStatProject,
   TrustedStackStatsFile,
-} from '../.vitepress/theme/data/trusted-stack-stats.types';
+} from '../../docs/.vitepress/theme/data/trusted-stack-stats.types.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT = join(__dirname, '../.vitepress/theme/data/trusted-stack-stats.json');
+const OUT = join(__dirname, '../../docs/.vitepress/theme/data/trusted-stack-stats.json');
 
 interface ProjectSource {
   readonly id: TrustedStackProjectId;
@@ -82,7 +82,7 @@ async function fetchGithubStargazers(repo: string): Promise<number> {
   const headers: Record<string, string> = {
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
-    'User-Agent': 'voidzero-dev/vite-plus (docs/scripts/fetch-trusted-stack-stats.ts)',
+    'User-Agent': 'voidzero-dev/vite-plus (.github/scripts/fetch-trusted-stack-stats.ts)',
   };
   const token = process.env.GITHUB_TOKEN;
   if (token !== undefined && token !== '') {

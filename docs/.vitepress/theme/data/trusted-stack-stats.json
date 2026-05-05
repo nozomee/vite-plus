@@ -4,17 +4,17 @@
       "id": "vite",
       "npmPackage": "vite",
       "githubRepo": "vitejs/vite",
-      "npmWeeklyDownloads": 114998893,
-      "githubStargazers": 80386,
-      "npmWeeklyDownloadsDisplay": "115m+",
+      "npmWeeklyDownloads": 114052837,
+      "githubStargazers": 80401,
+      "npmWeeklyDownloadsDisplay": "114m+",
       "githubStarsDisplay": "80.4k"
     },
     {
       "id": "vitest",
       "npmPackage": "vitest",
       "githubRepo": "vitest-dev/vitest",
-      "npmWeeklyDownloads": 57086162,
-      "githubStargazers": 16466,
+      "npmWeeklyDownloads": 56727793,
+      "githubStargazers": 16471,
       "npmWeeklyDownloadsDisplay": "57m+",
       "githubStarsDisplay": "16.5k"
     },
@@ -22,9 +22,9 @@
       "id": "oxc",
       "npmPackage": "oxlint",
       "githubRepo": "oxc-project/oxc",
-      "npmWeeklyDownloads": 5316110,
-      "githubStargazers": 20964,
-      "npmWeeklyDownloadsDisplay": "5.3m+",
+      "npmWeeklyDownloads": 5237088,
+      "githubStargazers": 20981,
+      "npmWeeklyDownloadsDisplay": "5.2m+",
       "githubStarsDisplay": "21.0k"
     }
   ]
