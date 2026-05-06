@@ -7,7 +7,7 @@
     "build": "cp ../packages/cli/install.sh ../packages/cli/install.ps1 public/ && vitepress build",
     "preview": "vitepress preview",
     "update-trusted-stack-stats": "node ../.github/scripts/fetch-trusted-stack-stats.ts",
-    "update-trusted-stack-stats:check": "pnpm exec tsc -p ./scripts/tsconfig.json --noEmit"
+    "update-trusted-stack-stats:check": "pnpm exec tsc -p ../.github/scripts/tsconfig.json --noEmit"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
