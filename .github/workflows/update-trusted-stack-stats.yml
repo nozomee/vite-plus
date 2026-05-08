@@ -29,7 +29,7 @@ jobs:
       - name: Fetch npm and GitHub stats
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/scripts/fetch-trusted-stack-stats.ts
+        run: node docs/.vitepress/theme/data/fetch-trusted-stack-stats.ts
 
       - name: Create or update PR
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11

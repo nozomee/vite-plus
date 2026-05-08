@@ -1,10 +1,10 @@
 /**
  * Fetches last-week npm download counts and GitHub star counts, then writes
- * docs/.vitepress/theme/data/trusted-stack-stats.json for the docs home page.
+ * `trusted-stack-stats.json` for the docs home page.
  *
  * Requires Node.js >=22.18 (strip types). Run:
  *   `pnpm -C docs update-trusted-stack-stats`
- * or: `node .github/scripts/fetch-trusted-stack-stats.ts`
+ * or: `node docs/.vitepress/theme/data/fetch-trusted-stack-stats.ts`
  */
 import { writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
@@ -14,10 +14,10 @@ import type {
   TrustedStackProjectId,
   TrustedStackStatProject,
   TrustedStackStatsFile,
-} from '../../docs/.vitepress/theme/data/trusted-stack-stats.types.ts';
+} from './trusted-stack-stats.types.ts';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT = join(__dirname, '../../docs/.vitepress/theme/data/trusted-stack-stats.json');
+const OUT = join(__dirname, 'trusted-stack-stats.json');
 
 interface ProjectSource {
   readonly id: TrustedStackProjectId;
@@ -34,7 +34,8 @@ const PROJECTS: readonly ProjectSource[] = [
 
 function formatWeeklyDownloads(n: number): string {
   if (n >= 10_000_000) {
-    return `${Math.round(n / 1e6)}m+`;
+    // "m+" reads as a lower bound, so avoid rounding up.
+    return `${Math.floor(n / 1e6)}m+`;
   }
   const m = n / 1e6;
   const s = m.toFixed(1).replace(/\.0$/, '');
@@ -82,7 +83,7 @@ async function fetchGithubStargazers(repo: string): Promise<number> {
   const headers: Record<string, string> = {
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
-    'User-Agent': 'voidzero-dev/vite-plus (.github/scripts/fetch-trusted-stack-stats.ts)',
+    'User-Agent': 'voidzero-dev/vite-plus (docs/.vitepress/theme/data/fetch-trusted-stack-stats.ts)',
   };
   const token = process.env.GITHUB_TOKEN;
   if (token !== undefined && token !== '') {
