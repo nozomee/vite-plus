@@ -6,6 +6,7 @@ import productivitySecurityImage from '@local-assets/productivity-security.png';
 import tileOxc from '@local-assets/tiles/oxc.png';
 import tileVite from '@local-assets/tiles/vite.png';
 import tileVitest from '@local-assets/tiles/vitest.png';
+
 import { trustedStackById } from '../../data/trusted-stack-stats';
 
 const viteStack = trustedStackById('vite');

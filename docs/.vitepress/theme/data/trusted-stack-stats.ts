@@ -1,8 +1,15 @@
-import type { TrustedStackProjectId, TrustedStackStatProject, TrustedStackStatsFile } from './trusted-stack-stats.types';
-
 import raw from './trusted-stack-stats.json';
+import type {
+  TrustedStackProjectId,
+  TrustedStackStatProject,
+  TrustedStackStatsFile,
+} from './trusted-stack-stats.types';
 
-export type { TrustedStackProjectId, TrustedStackStatProject, TrustedStackStatsFile } from './trusted-stack-stats.types';
+export type {
+  TrustedStackProjectId,
+  TrustedStackStatProject,
+  TrustedStackStatsFile,
+} from './trusted-stack-stats.types';
 
 export const trustedStackStats = raw as TrustedStackStatsFile;
 

@@ -1,3 +1,7 @@
+import { writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 /**
  * Fetches last-week npm download counts and GitHub star counts, then writes
  * `trusted-stack-stats.json` for the docs home page.
@@ -12,12 +16,8 @@ import type {
   TrustedStackStatsFile,
 } from './trusted-stack-stats.types';
 
-import { writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const OUT = join(__dirname, 'trusted-stack-stats.json');
+const currentDir = dirname(fileURLToPath(import.meta.url));
+const OUT = join(currentDir, 'trusted-stack-stats.json');
 
 interface ProjectSource {
   readonly id: TrustedStackProjectId;
@@ -83,7 +83,8 @@ async function fetchGithubStargazers(repo: string): Promise<number> {
   const headers: Record<string, string> = {
     Accept: 'application/vnd.github+json',
     'X-GitHub-Api-Version': '2022-11-28',
-    'User-Agent': 'voidzero-dev/vite-plus (docs/.vitepress/theme/data/fetch-trusted-stack-stats.ts)',
+    'User-Agent':
+      'voidzero-dev/vite-plus (docs/.vitepress/theme/data/fetch-trusted-stack-stats.ts)',
   };
   const token = process.env.GITHUB_TOKEN;
   if (token !== undefined && token !== '') {
@@ -117,7 +118,7 @@ async function main(): Promise<void> {
   }
   const payload: TrustedStackStatsFile = { projects };
   await writeFile(OUT, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
-  console.log(`Wrote ${OUT} at ${new Date().toISOString()}`);
+  console.error(`Wrote ${OUT} at ${new Date().toISOString()}`);
 }
 
 void main().catch((err: unknown) => {
